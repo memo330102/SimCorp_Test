@@ -11,9 +11,9 @@ namespace SimCorp_Test_Task.Service.Services
     public class FileService : IFile
     {
         private ISort _sorter;
-        public FileService()
+        public FileService(ISort sorter)
         {
-            _sorter = new SortService();
+            _sorter = sorter;
         }
 
         public void PrintWordsToConsole(Dictionary<string, int> wordCount)
@@ -116,13 +116,13 @@ namespace SimCorp_Test_Task.Service.Services
 
                 File.Delete(path);
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 Log.Error($"Exception: {ex.Message}");
             }
         }
 
-        public void CreateAndWriteToFile(string path,string content)
+        public void CreateAndWriteToFile(string path, string content)
         {
             try
             {

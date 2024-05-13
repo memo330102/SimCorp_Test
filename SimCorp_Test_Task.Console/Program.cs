@@ -5,7 +5,8 @@ using Microsoft.Extensions.Configuration;
 using System.Reflection;
 using System.Text;
 
-IFile _fileService = new FileService();
+ISort _sortService = new SortService();
+IFile _fileService = new FileService(_sortService);
 IReport _reportService = new ReportService(_fileService);
 
 var fileFolder = AppDomain.CurrentDomain.BaseDirectory;
