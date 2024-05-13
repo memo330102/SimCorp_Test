@@ -17,7 +17,6 @@ namespace SimCorp_Test_Task.Service.Services
         }
         public Dictionary<string, int> CountWords(string filePath)
         {
-
             var dataFromFile = _fileService.ReadFromFile(filePath);
 
             try

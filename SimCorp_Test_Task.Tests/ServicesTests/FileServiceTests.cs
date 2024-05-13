@@ -18,7 +18,7 @@ namespace SimCorp_Test_Task.Tests.ServicesTests
         private readonly Mock<IFile> _fileServiceMock;
         public FileServiceTests(FileService fileService)
         {
-            _fileServiceMock = new Mock<IFile>();
+            _fileServiceMock = new Mock<IFile>(MockBehavior.Strict);
             _fileService = fileService;
         }
 
