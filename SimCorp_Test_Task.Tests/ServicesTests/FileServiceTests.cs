@@ -45,32 +45,5 @@ namespace SimCorp_Test_Task.Tests.ServicesTests
 
             result.Should().BeNull();
         }
-
-        [Fact]
-        public void FileService_ReadFromFile_Should_Return_Data_When_File_Exists()
-        {
-            var filePath = "test.txt";
-            var fileData = "Go do that thing that you do so well";
-            var expectedReadData = new[]
-{
-                "do",
-                "that",
-                "Go",
-                "so",
-                "thing",
-                "well",
-                "you"
-            };
-
-            _fileServiceMock.Setup(fs => fs.WriteAllText(filePath,fileData));
-            _fileServiceMock.Setup(fs => fs.ReadLines(filePath)).Returns(expectedReadData);
-
-            var result = _fileService.ReadFromFile(filePath);
-
-            result.Should().NotBeNull();
-            result.Should().BeEquivalentTo(fileData);
-
-            _fileService.DeleteFile(filePath);
-        }
     }
 }

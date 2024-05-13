@@ -32,7 +32,6 @@ namespace SimCorp_Test_Task.Service.Services
             catch (Exception ex)
             {
                 Log.Error($"Exception: {ex.Message}");
-                //Console.WriteLine($"Exception: {ex.Message}");
                 return new Dictionary<string, int>();
             }
         }

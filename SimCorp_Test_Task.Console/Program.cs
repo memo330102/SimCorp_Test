@@ -5,8 +5,8 @@ using Microsoft.Extensions.Configuration;
 using System.Reflection;
 using System.Text;
 
-IReport _reportService = new ReportService();
 IFile _fileService = new FileService();
+IReport _reportService = new ReportService();
 
 var fileFolder = AppDomain.CurrentDomain.BaseDirectory;
 var filePathLogging = Path.Combine(fileFolder, "logs.txt");
@@ -14,7 +14,7 @@ if (!_fileService.IsFileExist(filePathLogging))
 {
     _fileService.CreateAndWriteToFile(filePathLogging, "");
 }
-
+// Logging configuration
 Log.Logger = new LoggerConfiguration()
 .MinimumLevel.Debug()
 .WriteTo.File(filePathLogging)
