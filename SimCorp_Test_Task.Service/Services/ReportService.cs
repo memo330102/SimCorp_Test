@@ -11,9 +11,9 @@ namespace SimCorp_Test_Task.Service.Services
     public class ReportService : IReport
     {
         private IFile _fileService;
-        public ReportService()
+        public ReportService(IFile fileService)
         {
-            _fileService = new FileService();
+            _fileService = fileService;
         }
         public Dictionary<string, int> CountWords(string filePath)
         {

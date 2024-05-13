@@ -6,7 +6,7 @@ using System.Reflection;
 using System.Text;
 
 IFile _fileService = new FileService();
-IReport _reportService = new ReportService();
+IReport _reportService = new ReportService(_fileService);
 
 var fileFolder = AppDomain.CurrentDomain.BaseDirectory;
 var filePathLogging = Path.Combine(fileFolder, "logs.txt");

@@ -15,24 +15,6 @@ namespace SimCorp_Test_Task.Service.Services
         {
             _sorter = new SortService();
         }
-        public IEnumerable<string> ReadFromFile(string filePath)
-        {
-            try
-            {
-                var data = ReadLines(filePath);
-                return data;
-            }
-            catch (FileNotFoundException ex)
-            {
-                Log.Error($"FileNotFoundException: {ex.Message}");
-                return null;
-            }
-            catch (Exception ex)
-            {
-                Log.Error($"Exception: {ex.Message}");
-                return null;
-            }
-        }
 
         public void PrintWordsToConsole(Dictionary<string, int> wordCount)
         {
@@ -55,7 +37,7 @@ namespace SimCorp_Test_Task.Service.Services
             }
         }
 
-        public IEnumerable<string> ReadLines(string path)
+        public IEnumerable<string> ReadFromFile(string path)
         {
             try
             {
