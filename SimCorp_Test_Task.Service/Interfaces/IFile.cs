@@ -14,5 +14,6 @@ namespace SimCorp_Test_Task.Service.Interfaces
         public void WriteAllText(string path, string content);
         public void DeleteFile(string filePath);
         public bool IsFileExist(string path);
+        public void CreateAndWriteToFile(string path, string content);
     }
 }

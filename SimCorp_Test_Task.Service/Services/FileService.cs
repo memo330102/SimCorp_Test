@@ -152,5 +152,42 @@ namespace SimCorp_Test_Task.Service.Services
                 Log.Error($"Exception: {ex.Message}");
             }
         }
+
+        public void CreateAndWriteToFile(string path,string content)
+        {
+            try
+            {
+                using (FileStream fs = File.Create(path))
+                {
+                    Byte[] text = new UTF8Encoding(true).GetBytes(content);
+                    fs.Write(text, 0, text.Length);
+                }
+            }
+            catch (ArgumentNullException ex)
+            {
+                Log.Error($"ArgumentNullException: {ErrorMessages.File_Path_Can_Not_Be_Null}");
+            }
+            catch (PathTooLongException ex)
+            {
+                Log.Error($"PathTooLongException: {ex.Message}");
+            }
+            catch (DirectoryNotFoundException ex)
+            {
+                Log.Error($"DirectoryNotFoundException: {ex.Message}");
+            }
+            catch (IOException ex)
+            {
+                Log.Error($"IOException: {ex.Message}");
+            }
+            catch (NotSupportedException ex)
+            {
+                Log.Error($"NotSupportedException: {ex.Message}");
+            }
+            catch (Exception ex)
+            {
+                Log.Error($"Exception: {ex.Message}");
+            }
+        }
+
     }
 }
