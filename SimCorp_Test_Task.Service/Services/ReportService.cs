@@ -17,16 +17,19 @@ namespace SimCorp_Test_Task.Service.Services
         }
         public Dictionary<string, int> CountWords(string filePath)
         {
-            var dataFromFile = _fileService.ReadFromFile(filePath);
-
             try
             {
-                return dataFromFile
-                    .SelectMany(line => line.Split(' ', StringSplitOptions.RemoveEmptyEntries))
-                    .Select(word => new string(word.Where(char.IsLetter).ToArray()).ToLower())
-                    .Where(cleanedWord => !string.IsNullOrWhiteSpace(cleanedWord))
-                    .GroupBy(cleanedWord => cleanedWord)
-                    .ToDictionary(group => group.Key, group => group.Count());
+                var dataFromFile = _fileService.ReadFromFile(filePath);
+                var words = SplitWords(dataFromFile);
+                var cleanedWords = NormalizeAsOnlyWords(words);
+                var wordCount = GroupWords(cleanedWords);
+
+                return wordCount;
+            }
+            catch (IOException ex)
+            {
+                Log.Error($"IOException: {ex.Message}");
+                return new Dictionary<string, int>();
             }
             catch (Exception ex)
             {
@@ -34,6 +37,23 @@ namespace SimCorp_Test_Task.Service.Services
                 return new Dictionary<string, int>();
             }
         }
+        private IEnumerable<string> SplitWords(IEnumerable<string> lines)
+        {
+            return lines.SelectMany(line => line.Split(' ', StringSplitOptions.RemoveEmptyEntries));
+        }
+
+        private IEnumerable<string> NormalizeAsOnlyWords(IEnumerable<string> words)
+        {
+            return words.Select(word => new string(word.Where(char.IsLetter).ToArray()).ToLower())
+                        .Where(cleanedWord => !string.IsNullOrWhiteSpace(cleanedWord));
+        }
+
+        private Dictionary<string, int> GroupWords(IEnumerable<string> words)
+        {
+            return words.GroupBy(cleanedWord => cleanedWord)
+                        .ToDictionary(group => group.Key, group => group.Count());
+        }
+
 
     }
 }
